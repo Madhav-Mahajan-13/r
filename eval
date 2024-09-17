@@ -1,0 +1,145 @@
+# Create chest with the 100 coins
+
+chest <- c(rep("gold", 20),
+           rep("silver", 30),
+           rep("bronze", 50))
+
+# Draw 10 coins from the chest
+event <- sample(x = chest,
+       size = 10)
+
+surg <- sample(c("succ", "fail"), 10, replace=T, prob=c(0.9, 0.1))
+
+
+probability1 = 1-(factorial(365))/(((365)^M)*factorial(365-M));
+print(probability1)
+N=1000; # Number of simulations
+sum=0;
+for (val in 1:N)
+{
+  a=as.integer(any(duplicated(sample(365, M, replace = TRUE))))
+  sum=sum+a;
+  print(a)
+}
+probability=sum/N;
+print(probability)
+
+M = 1
+N=10000; # Number of simulations
+probability = 0
+while (probability < 0.5){
+  M = M + 1
+  if (M>365){
+    break
+  }
+  sum=0;
+for (val in 1:N)
+{
+  a=as.integer(any(duplicated(sample(365, M, replace = TRUE))))
+  sum=sum+a;
+}
+probability=sum/N;}
+#print(paste(probability,M))}
+print(paste(probability,M))
+
+dat <- iris # load the iris dataset and renamed it dat
+head(dat)  # first 6 observations
+str(dat) # structure of dataset
+#We usually use the $ operator to address a column by name
+rng <- range(dat$Sepal.Length)
+print(rng)
+mean(dat$Sepal.Length)
+quantile(dat$Sepal.Length, 0.25)
+quantile(dat$Sepal.Length, 0.75)
+IQR(dat$Sepal.Length)
+sd(dat$Sepal.Length)
+var(dat$Sepal.Length)
+#to compute the standard deviation (or variance) of multiple variables at the same time, use lapply() with the appropriate statistics as second argument:
+print(lapply(dat[,1:4], var))
+
+# Create the function.
+getmode <- function(v) {
+  uniqv <- unique(v)
+  uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+
+#Q1
+pbinom(9, size=12, prob=1/6) - pbinom(6, size=12, prob=1/6)
+#OR
+diff(pbinom(c(6,9), size = 12, prob = 1/6))
+#Q2
+pnorm(84, mean=72, sd=15.2, lower.tail=FALSE) 
+#Q3
+dpois(0,5)
+diff(ppois(c(47, 50), lambda = 50))
+#Q4
+print(dhyper(3, m = 17, n = 233, k = 5))
+#Q5 
+
+
+#Q1
+x <- c(0,1,2,3,4)
+probx <- c(0.41,0.37,0.16,0.05,0.01)
+ExpVal <- sum(x*probx)
+print(ExpVal)
+#or
+ExpVal <- weighted.mean(x,probx)
+print(ExpVal)
+#or
+ExpVal <- c(x%*%probx)
+print(ExpVal)
+
+#Q2
+f <- function(t){t*0.1*exp(-0.1*t)}
+ExpVal <- integrate(f, lower=0, upper = Inf)
+print(ExpVal$value)
+
+#Q3
+#Revenue (Y) = h(X) = 12X+2(3-X)-18 = 10X-12
+x <- c(0,1,2,3)
+probx <- c(0.1,0.2,0.2,0.5)
+y <- 10*x-12
+proby <- probx
+ExpVal <- sum(y*proby)
+
+print(ExpVal)
+
+#Q4
+# First Moment
+f1 <- function(t){t*0.5*exp(-abs(t))}
+Moment1 <- integrate(f1, lower=1, upper = 10)
+print(Moment1$value)
+# Second Moment
+f2 <- function(t){t^2*0.5*exp(-abs(t))}
+Moment2 <- integrate(f2, lower=1, upper = 10)
+print(Moment2$value)
+# Mean
+Meanval <- Moment1$value
+print(Meanval)
+# Variance
+f3 <- function(M1, M2){return(M2 - M1*M1)}
+Varval = f3(Moment1$value, Moment2$value)
+print(Varval)
+
+#Q5
+#probability distribution of Y=X^2
+yf <- function(y){(3/4)*(1/4)^(sqrt(y)-1)}
+x = as.integer(readline(prompt="Enter the value of x"))
+y = x^2
+proby <- yf(y)
+print(proby)
+#expected value and variance of Y for X = 1,2,3,4,5
+x<- c(1,2,3,4,5)
+y<-x^2
+proby <- yf(y)
+print(proby)
+#Expected value
+ExpVal <- sum(y*proby)
+print(ExpVal)
+#Variance = E((y-E(y))^2)
+M <- ExpVal
+y1 <- (y-M)^2
+proby1 <- yf(y1)
+print(proby1)
+VarVal <- sum(y1*proby1)
+print(VarVal)  
